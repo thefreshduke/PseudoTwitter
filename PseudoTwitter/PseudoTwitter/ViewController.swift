@@ -40,8 +40,8 @@ class ViewController: UITableViewController {
         var randInt : Int = Int(arc4random_uniform(6))
         characters.append(newCharacter[randInt])
         
-        // order by youngest to oldest, followed by alphabetical order of name
-        characters.sort() { $0.age == $1.age ? ($0.name < $1.name) : ($0.age < $1.age)}
+        // order by youngest to oldest, followed by alphabetical order of name, followed by alphabetical order of occupation
+        characters.sort() { $0.age == $1.age ? ($0.name == $1.name ? ($0.occupation < $1.occupation) : ($0.name < $1.name)) : ($0.age < $1.age)}
         
         self.tableView.reloadData()
         refreshControl.endRefreshing()
