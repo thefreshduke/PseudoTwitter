@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import TwitterKit
 
 struct Character {
     let name : String
@@ -17,49 +18,61 @@ struct Character {
 
 class ViewController: UITableViewController {
     
-    var characters = [
-        Character(name: "Ahsoka Tano", occupation: "Jedi", age: 17, status: "MIA"),
-        Character(name: "Kyle Broflovski", occupation: "Jew", age: 9, status: "ALIVE")
-    ]
+//    var characters = [
+//        Character(name: "Ahsoka Tano", occupation: "Jedi", age: 17, status: "MIA"),
+//        Character(name: "Kyle Broflovski", occupation: "Jew", age: 9, status: "ALIVE")
+//    ]
     
     override func viewDidLoad () {
         super.viewDidLoad()
         self.refreshControl?.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
+        
+        let logInButton = TWTRLogInButton(logInCompletion:
+            { (session, error) in
+                if (session != nil) {
+                    println("signed in as \(session.userName)");
+                } else {
+                    println("error: \(error.localizedDescription)");
+                }
+        })
+        logInButton.center = self.view.center
+        self.view.addSubview(logInButton)
     }
     
     func refresh (refreshControl : UIRefreshControl) {
-        let newCharacter = [
-            Character(name: "Butters Stotch", occupation: "Meheecan", age: 9, status: "MIA"),
-            Character(name: "Eric Cartman", occupation: "Student", age: 9, status: "ALIVE"),
-            Character(name: "Kenny McCormick", occupation: "Dead", age: 9, status: "KIA"),
-            Character(name: "Stan Marsh", occupation: "Student", age: 9, status: "ALIVE"),
-            Character(name: "Captain America", occupation: "Captain", age: 93, status: "OLD"),
-            Character(name: "Speedy Gonzalez", occupation: "Mexican", age: 20, status: "RÁPIDO"),
-            Character(name: "流川楓", occupation: "小前鋒", age: 15, status: "睡眠中"),
-        ]
-        
-        var randInt : Int = Int(arc4random_uniform(7))
-        characters.append(newCharacter[randInt])
-        
-        // order by youngest to oldest, followed by alphabetical order of name
-        characters.sort() { $0.age == $1.age ? ($0.name < $1.name) : ($0.age < $1.age)}
+//        let newCharacter = [
+//            Character(name: "Butters Stotch", occupation: "Meheecan", age: 9, status: "MIA"),
+//            Character(name: "Eric Cartman", occupation: "Student", age: 9, status: "ALIVE"),
+//            Character(name: "Kenny McCormick", occupation: "Dead", age: 9, status: "KIA"),
+//            Character(name: "Stan Marsh", occupation: "Student", age: 9, status: "ALIVE"),
+//            Character(name: "Captain America", occupation: "Captain", age: 93, status: "OLD"),
+//            Character(name: "Speedy Gonzalez", occupation: "Mexican", age: 20, status: "RÁPIDO"),
+//            Character(name: "流川楓", occupation: "小前鋒", age: 15, status: "睡眠中"),
+//        ]
+//        
+//        var randInt : Int = Int(arc4random_uniform(7))
+//        characters.append(newCharacter[randInt])
+//        
+//        // order by youngest to oldest, followed by alphabetical order of name
+//        characters.sort() { $0.age == $1.age ? ($0.name < $1.name) : ($0.age < $1.age)}
         
         self.tableView.reloadData()
         refreshControl.endRefreshing()
     }
     
     override func tableView (tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return characters.count
+//        return characters.count
+        return 0;
     }
     
     override func tableView (tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("cell") as! UITableViewCell
-        var name : String = String(characters[indexPath.row].name)
-        var occupation : String = String(characters[indexPath.row].occupation)
-        var age : String = String(characters[indexPath.row].age)
-        var status : String = String(characters[indexPath.row].status)
-        cell.textLabel?.text = "\(name), \(age)"
-        cell.detailTextLabel?.text = "\(occupation), \(status)"
+//        var name : String = String(characters[indexPath.row].name)
+//        var occupation : String = String(characters[indexPath.row].occupation)
+//        var age : String = String(characters[indexPath.row].age)
+//        var status : String = String(characters[indexPath.row].status)
+//        cell.textLabel?.text = "\(name), \(age)"
+//        cell.detailTextLabel?.text = "\(occupation), \(status)"
         return cell
     }
 }
