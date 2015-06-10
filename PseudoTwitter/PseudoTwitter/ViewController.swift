@@ -35,6 +35,7 @@ class ViewController: UITableViewController {
             Character(name: "Stan Marsh", occupation: "Student", age: 9, status: "ALIVE"),
             Character(name: "Captain America", occupation: "Captain", age: 93, status: "OLD"),
             Character(name: "Speedy Gonzalez", occupation: "Mexican", age: 20, status: "RÁPIDO"),
+            Character(name: "流川楓", occupation: "小前鋒", age: 15, status: "睡眠中"),
         ]
         
         var randInt : Int = Int(arc4random_uniform(7))
