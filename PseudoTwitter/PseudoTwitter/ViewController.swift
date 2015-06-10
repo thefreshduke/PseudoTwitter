@@ -34,14 +34,14 @@ class ViewController: UITableViewController {
             Character(name: "Kenny McCormick", occupation: "Dead", age: 9, status: "KIA"),
             Character(name: "Stan Marsh", occupation: "Student", age: 9, status: "ALIVE"),
             Character(name: "Captain America", occupation: "Captain", age: 93, status: "OLD"),
-            Character(name: "Speedy Gonzalez", occupation: "Mexican", age: 20, status: "FAST"),
+            Character(name: "Speedy Gonzalez", occupation: "Mexican", age: 20, status: "RÁPIDO"),
         ]
         
-        var randInt : Int = Int(arc4random_uniform(6))
+        var randInt : Int = Int(arc4random_uniform(7))
         characters.append(newCharacter[randInt])
         
-        // order by youngest to oldest, followed by alphabetical order of name, followed by alphabetical order of occupation
-        characters.sort() { $0.age == $1.age ? ($0.name == $1.name ? ($0.occupation < $1.occupation) : ($0.name < $1.name)) : ($0.age < $1.age)}
+        // order by youngest to oldest, followed by alphabetical order of name
+        characters.sort() { $0.age == $1.age ? ($0.name < $1.name) : ($0.age < $1.age)}
         
         self.tableView.reloadData()
         refreshControl.endRefreshing()
